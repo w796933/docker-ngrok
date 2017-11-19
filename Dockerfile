@@ -1,9 +1,10 @@
 FROM golang:latest
 MAINTAINER hteen <i@hteen.cn>
 
-RUN apk add --no-cache git make openssl
+RUN apt-get update && apt-get install -y git make openssl
 
 RUN git clone https://github.com/tutumcloud/ngrok.git /ngrok
+RUN apt-get -ys clean
 
 ADD *.sh /
 
