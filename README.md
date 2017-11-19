@@ -44,12 +44,26 @@ docker run -idt --name ngrok-server \
 
 docker run -idt --name ngrok-server --net=host -v /data/ngrok:/myfiles -e DOMAIN='ngrok.nb03.com' hteen/ngrok /bin/sh /server.sh
 
+这里容器网络一定要用 host   因为   ngrok会生成其他端口的  
+
 
 docker run -idt --name ngrok-server \
 -p 80:80 -p 443:443 -p 4443:4443 \
 -v /data/ngrok:/myfiles \
 -e DOMAIN='nb03.com' hteen/ngrok /bin/sh /server.sh
 
+ngrok.cfg  配置文件内容
+
+server_addr: "ngrok.nb03.com:4443"
+trust_host_root_certs: false
+tunnels:
+  tcp2:
+    proto:
+      tcp: "3389"
+    remote_port: 3389
+    
+    
+    上面的一定要注意  空格  因为这遵守  yml  格式 的
 
 
 
